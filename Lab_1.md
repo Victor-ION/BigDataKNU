@@ -10,30 +10,24 @@
 
 ``` r
 library(xlsx)
+Sys.setlocale(locale = "ukrainian")
+```
+
+    ## [1] "LC_COLLATE=Ukrainian_Ukraine.1251;LC_CTYPE=Ukrainian_Ukraine.1251;LC_MONETARY=Ukrainian_Ukraine.1251;LC_NUMERIC=C;LC_TIME=Ukrainian_Ukraine.1251"
+
+``` r
 download.file("https://data.gov.ua/dataset/8f34acc1-5853-46bf-80eb-ea40a55292fe/resource/810b8f57-67d5-4917-b3c2-236fcf94b020/download/energy_bal_year_plan_29_03_2019.xlsx", "d_1.xlsx", "auto", TRUE, "wb")
-d_1 <- read.xlsx("d_1.xlsx", sheetIndex = 1, header = TRUE)
+d_1 <- read.xlsx("d_1.xlsx", sheetIndex = 1, header = TRUE, encoding = "UTF-8")
 head(d_1, n = 6)
 ```
 
-    ##   approval_date forecast_year forecast_month component
-    ## 1    2017-12-26          2018              1         1
-    ## 2    2017-12-26          2018              1         1
-    ## 3    2017-12-26          2018              1         1
-    ## 4    2017-12-26          2018              1         1
-    ## 5    2017-12-26          2018              1         1
-    ## 6    2017-12-26          2018              1         1
-    ##             sub_component value
-    ## 1                  Ð¢Ð•Ð¡  5550
-    ## 2                  Ð¢Ð•Ð¦  1678
-    ## 3                  Ð“Ð•Ð¡   787
-    ## 4                Ð“Ð\220Ð•Ð¡   155
-    ## 5                  Ð\220Ð•Ð¡  7121
-    ## 6 Ð±Ð»Ð¾Ðº-Ñ\201Ñ‚Ð°Ð½Ñ†Ñ–Ñ—   144
-
-Примітка: для кодування тексту R використовує системні значення locale,
-тому із англомовними версіями windows отримати правильне кодування
-неможливо навіть явно задаючи параметри кодування як самих файлів,
-так і виклику функцій з передаваням в них необхідного кодування.
+    ##   approval_date forecast_year forecast_month component sub_component value
+    ## 1    2017-12-26          2018              1         1           ТЕС  5550
+    ## 2    2017-12-26          2018              1         1           ТЕЦ  1678
+    ## 3    2017-12-26          2018              1         1           ГЕС   787
+    ## 4    2017-12-26          2018              1         1          ГАЕС   155
+    ## 5    2017-12-26          2018              1         1           АЕС  7121
+    ## 6    2017-12-26          2018              1         1  блок-станції   144
 
 2.  За допомогою download.file() завантажте файл
     getdata\_data\_ss06hid.csv за посиланням
